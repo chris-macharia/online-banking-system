@@ -28,7 +28,7 @@ int main(void)
 
 	/*Prompting the user*/
 	printf("\n Please select one of the above: ");
-	printf("\n\n1.Register an account.");
+	printf("\n\n1.Register an account.\t");
 	printf("\n2.Login to an account.");
 
 	printf("\n\nYour choice:\t ");
