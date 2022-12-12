@@ -74,53 +74,31 @@ int main(void) //===============================================================
 		printf("\nPassword:\t");
 		scanf("%s", pword);
 		strcpy(filename, phone);
-		fp = fopen(strcat(filename, ".dat"), "r");
-		fread(&usr, sizeof(struct user), 1, fp);
-		fclose(fp);
+		fp = fopen(strcat(filename, ".txt"), "r");
+		if(fp == NULL)
+		{
+			printf("\nAccount number not registered!");
+		}
+		else
+		{
+			fread(&usr, sizeof(struct user), 1, fp);
+			fclose(fp);
 
-		printf("caught");
+			/*Matching the passwords*/
+			if(!strcmp(pword,usr.password))  /*Will return 0*/
+			{
+				printf("\nPassword matched");
 
+			}
+			else
+			{
+				printf("\nInvalid password");
+			}
+		}
 
 
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 	return EXIT_SUCCESS;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
