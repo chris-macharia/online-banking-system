@@ -21,14 +21,14 @@ struct user
 	float balance;
 };
 
-int main(void)
+int main(void) //=============================================================================================================================//
 {
 	setvbuf(stdout, NULL, _IONBF, 0); /*Eclipse IDE misb-ehaves when trying to run the program. This line will fix the buffer error causing that.*/
 
 	struct user usr;
 	int opt=0;
 	FILE *fp;
-	char filename[50];
+	char filename[50], phone[50], pword[50];
 
 
 	/*Prompting the user*/
@@ -53,7 +53,7 @@ int main(void)
 
 		/*Saving the new account*/
 		strcpy(filename, usr.phone);
-		fp = fopen(strcat(filename,".dat"), "w");
+		fp = fopen(strcat(filename,".txt"), "w");
 		fwrite(&usr, sizeof(struct user), 1, fp);
 		if(fwrite != 0)
 		{
@@ -63,7 +63,40 @@ int main(void)
 		{
 			printf("\n\nSomething went wrong please try again.");
 		}
+		fclose(fp);
 	}
+	if(opt == 2)
+	{
+		/*Getting the phone number and the password from the user*/
+		system("clear");
+		printf("\nPhone number:\n\t");
+		scanf("%s", phone);
+		printf("\nPassword:\t");
+		scanf("%s", pword);
+		strcpy(filename, phone);
+		fp = fopen(strcat(filename, ".dat"), "r");
+		fread(&usr, sizeof(struct user), 1, fp);
+		fclose(fp);
+
+		printf("caught");
+
+
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	return EXIT_SUCCESS;
 
