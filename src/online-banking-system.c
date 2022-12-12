@@ -23,8 +23,13 @@ struct user
 
 int main(void)
 {
+	setvbuf(stdout, NULL, _IONBF, 0); /*Eclipse IDE misb-ehaves when trying to run the program. This line will fix the buffer error causing that.*/
+
 	struct user usr;
 	int opt=0;
+	FILE *fp;
+	char filename[50];
+
 
 	/*Prompting the user*/
 	printf("\n Please select one of the above: ");
@@ -35,10 +40,9 @@ int main(void)
 
 	/*Getting user input*/
 	scanf("%d",&opt);
-
 	if(opt == 1)
 	{
-		system("cls");
+		system("clear");
 		printf("\nEnter your account number:\t");
 		scanf("%s", usr.account);
 		printf("\nEnter your phone number: \t");
@@ -46,7 +50,44 @@ int main(void)
 		printf("\nEnter your new password:\t");
 		scanf("%s",usr.password);
 		usr.balance = 0;
+
+		/*Saving the new account*/
+		strcpy(filename, usr.phone);
+		fp = fopen(strcat(filename,".dat"), "w");
+		fwrite(&usr, sizeof(struct user), 1, fp);
+		if(fwrite != 0)
+		{
+			printf("\nAccount successfully registered");
+		}
+		else
+		{
+			printf("\n\nSomething went wrong please try again.");
+		}
 	}
 
 	return EXIT_SUCCESS;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
