@@ -9,8 +9,9 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
+
 
 struct user
 {
@@ -23,9 +24,29 @@ struct user
 int main(void)
 {
 	struct user usr;
+	int opt=0;
 
+	/*Prompting the user*/
 	printf("\n Please select one of the above: ");
 	printf("\n\n1.Register an account.");
 	printf("\n2.Login to an account.");
+
+	printf("\n\nYour choice:\t ");
+
+	/*Getting user input*/
+	scanf("%d",&opt);
+
+	if(opt == 1)
+	{
+		system("cls");
+		printf("\nEnter your account number:\t");
+		scanf("%s", usr.account);
+		printf("\nEnter your phone number: \t");
+		scanf("%s", usr.phone);
+		printf("\nEnter your new password:\t");
+		scanf("%s",usr.password);
+		usr.balance = 0;
+	}
+
 	return EXIT_SUCCESS;
 }
