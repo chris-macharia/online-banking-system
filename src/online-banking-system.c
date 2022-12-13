@@ -121,13 +121,24 @@ int main(void) //===============================================================
 						if(fwrite != NULL)
 							printf("\nSuccessfully deposited.");
 						fclose(fp);
+						break;
+					case 3:
+						printf("\nEnter the amount:\t");
+						scanf("%f", &amount);
+						usr.balance -= amount;
 
-
-					printf("\n\nDo you want to continue the transaction? [y/n]:\t");
-					scanf("%s", &cont);
+						fp =fopen(filename, "w");
+						fwrite(&usr, sizeof(struct user), 1, fp);
+						if(fwrite != NULL)
+							printf("\nYou have successfully withdrawn ksh:%.2f",amount);
+						fclose(fp);
+						break;
 
 
 					}
+
+					printf("\n\nDo you want to continue the transaction? [y/n]:\t");
+					scanf("%s", &cont);
 
 
 				}
