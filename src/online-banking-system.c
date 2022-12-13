@@ -26,7 +26,7 @@ int main(void) //===============================================================
 	setvbuf(stdout, NULL, _IONBF, 0); /*Eclipse IDE misb-ehaves when trying to run the program. This line will fix the buffer error causing that.*/
 
 	struct user usr;
-	int opt=0;
+	int opt, choice;
 	FILE *fp;
 	char filename[50], phone[50], pword[50];
 	char cont = 'y';
@@ -102,9 +102,17 @@ int main(void) //===============================================================
 					printf("\nPress 4 to change password");
 					printf("\nPress 5 to change the password");
 
+					printf("\n\nYour choice: \t");
+					scanf("%d", &choice);
+
+					switch(choice)
+					{
+					case 1:
+						printf("\nYour current balance is ksh:%.2f", usr.balance);
+					}
+
 					printf("\n\nDo you want to continue the transaction? [y/n]:\t");
 					scanf("%s", &cont);
-					printf("%c", cont);
 
 				}
 
