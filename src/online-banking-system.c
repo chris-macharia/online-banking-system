@@ -29,9 +29,11 @@ int main(void) //===============================================================
 	int opt=0;
 	FILE *fp;
 	char filename[50], phone[50], pword[50];
+	char cont = 'y';
 
 
 	/*Prompting the user*/
+	system("clear");
 	printf("\n Please select one of the above: ");
 	printf("\n\n1.Register an account.\t");
 	printf("\n2.Login to an account.");
@@ -68,13 +70,14 @@ int main(void) //===============================================================
 	if(opt == 2)
 	{
 		/*Getting the phone number and the password from the user*/
-		system("clear");
+		//system("cls");
 		printf("\nPhone number:\n\t");
 		scanf("%s", phone);
 		printf("\nPassword:\t");
 		scanf("%s", pword);
 		strcpy(filename, phone);
-		fp = fopen(strcat(filename, ".txt"), "r");
+		fp = fopen(strcat(filename, ".txt"), "r");  /* !!! Remember to change this to .dat"!!!*/
+		/*Validating the account*/
 		if(fp == NULL)
 		{
 			printf("\nAccount number not registered!");
@@ -88,6 +91,23 @@ int main(void) //===============================================================
 			if(!strcmp(pword,usr.password))  /*Will return 0*/
 			{
 				printf("\nPassword matched");
+
+				/*Transactions page.*/
+				while(cont == 'y')
+				{
+					//system("cls");
+					printf("\nPress 1 to check balance");
+					printf("\nPress 2 to deposit an amount");
+					printf("\nPress 3 to withdraw");
+					printf("\nPress 4 to change password");
+					printf("\nPress 5 to change the password");
+
+					printf("\n\nDo you want to continue the transaction? [y/n]:\t");
+					scanf("%s", &cont);
+					printf("%c", cont);
+
+				}
+
 
 			}
 			else
