@@ -30,6 +30,7 @@ int main(void) //===============================================================
 	FILE *fp;
 	char filename[50], phone[50], pword[50];
 	char cont = 'y';
+	float amount;
 
 
 	/*Prompting the user*/
@@ -108,11 +109,26 @@ int main(void) //===============================================================
 					switch(choice)
 					{
 					case 1:
-						printf("\nYour current balance is ksh:%.2f", usr.balance);
-					}
+						printf("\nYour current balance is ksh:%.2f\n", usr.balance);
+						break;
+					case 2:
+						printf("\nEnter the amount:\t");
+						scanf("%f", &amount);
+						usr.balance += amount;
+
+						fp =fopen(filename, "w");
+						fwrite(&usr, sizeof(struct user), 1, fp);
+						if(fwrite != NULL)
+							printf("\nSuccessfully deposited.");
+						fclose(fp);
+
 
 					printf("\n\nDo you want to continue the transaction? [y/n]:\t");
 					scanf("%s", &cont);
+
+
+					}
+
 
 				}
 
