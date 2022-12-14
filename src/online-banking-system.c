@@ -144,7 +144,7 @@ int main(void) //===============================================================
 						fp = fopen(strcat(filename, ".dat"), "r");
 						if(fp == NULL)
 						{
-							printf("\nPhone number not registered");
+							printf("\nPhone number not registered"); /*!!! BUG !!!*/
 						}
 						else
 						{
@@ -173,6 +173,16 @@ int main(void) //===============================================================
 							}
 						}
 						break;
+					case 5:
+						printf("\nPlease enter your new password:\t");
+						scanf("%s", pword);
+						fp = fopen(filename, "w");
+						strcpy(usr.password, pword);
+						fwrite(&usr, sizeof(struct user), 1, fp);
+						if(fwrite != NULL)
+							printf("\nPassword successfully changed");
+						break;
+
 					}
 
 					printf("\n\nDo you want to continue the transaction? [y/n]:\t");
