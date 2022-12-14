@@ -23,9 +23,9 @@ struct user
 
 int main(void) //=============================================================================================================================//
 {
-	setvbuf(stdout, NULL, _IONBF, 0); /*Eclipse IDE misb-ehaves when trying to run the program. This line will fix the buffer error causing that.*/
+	setvbuf(stdout, NULL, _IONBF, 0); /*Eclipse IDE mis-behaves when trying to run the program. This line will fix the buffer error causing that.*/
 
-	struct user usr;
+	struct user usr, usr1;
 	int opt, choice;
 	FILE *fp;
 	char filename[50], phone[50], pword[50];
@@ -133,13 +133,43 @@ int main(void) //===============================================================
 							printf("\nYou have successfully withdrawn ksh:%.2f",amount);
 						fclose(fp);
 						break;
+					case 4:
+						printf("\nPlease enter the phone number you want to send to:\t");
+						scanf("%s", &phone);
+						printf("\nPlease enter the amount to transfer:\t");
+						scanf("%f", &amount);
+
+						/*Checking if user has enough balance to transact*/
+						if(amount > usr.balance)
+						{
+							printf("\nInsufficient balance\n");
+						}
+						else
+						{
+							strcpy(filename, phone);
+							fp = fopen(strcat(filename, ".txt"), "r");
+							fread(&usr1, sizeof(struct user), 1, fp);
+							fclose(fp);
+							fp = fopen(filename, "w");
+							usr1.balance += amount;
+							fwrite(&usr1, sizeof(struct user), 1, fp);
+							fclose(fp);
+							if(fwrite != NULL)
+							{
+								printf("\nYou have successfully transfered ksh:%2f to %s", amount, phone);
+								strcpy(filename, usr.phone);
+								fp = fopen(strcat(filename, ".txt"), "w");
+								usr.balance -= amount;
+								fwrite(&usr, sizeof(struct user), 1, fp);
+								fclose(fp);
+							}
+						}
 
 
 					}
 
 					printf("\n\nDo you want to continue the transaction? [y/n]:\t");
 					scanf("%s", &cont);
-
 
 				}
 
