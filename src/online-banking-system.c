@@ -100,7 +100,7 @@ int main(void) //===============================================================
 					printf("\nPress 1 to check balance");
 					printf("\nPress 2 to deposit an amount");
 					printf("\nPress 3 to withdraw");
-					printf("\nPress 4 to change password");
+					printf("\nPress 4 to send money to another user");
 					printf("\nPress 5 to change the password");
 
 					printf("\n\nYour choice: \t");
@@ -135,10 +135,22 @@ int main(void) //===============================================================
 						break;
 					case 4:
 						printf("\nPlease enter the phone number you want to send to:\t");
-						scanf("%s", &phone);
+						scanf("%s", phone);
 						printf("\nPlease enter the amount to transfer:\t");
 						scanf("%f", &amount);
 
+						/*Checks if the phone number is registered or not*/
+						strcpy(filename, phone);
+						fp = fopen(strcat(filename, ".dat"), "r");
+						if(fp == NULL)
+						{
+							printf("\nPhone number not registered");
+						}
+						else
+						{
+							fread(&usr1, sizeof(struct user), 1, fp);
+							fclose(fp);
+						}
 						/*Checking if user has enough balance to transact*/
 						if(amount > usr.balance)
 						{
@@ -146,10 +158,6 @@ int main(void) //===============================================================
 						}
 						else
 						{
-							strcpy(filename, phone);
-							fp = fopen(strcat(filename, ".txt"), "r");
-							fread(&usr1, sizeof(struct user), 1, fp);
-							fclose(fp);
 							fp = fopen(filename, "w");
 							usr1.balance += amount;
 							fwrite(&usr1, sizeof(struct user), 1, fp);
@@ -164,8 +172,7 @@ int main(void) //===============================================================
 								fclose(fp);
 							}
 						}
-
-
+						break;
 					}
 
 					printf("\n\nDo you want to continue the transaction? [y/n]:\t");
