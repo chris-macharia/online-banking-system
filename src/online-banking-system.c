@@ -172,7 +172,7 @@ int main(void) //===============================================================
 								fclose(fp);
 							}
 						}
-						break;
+					break;
 					case 5:
 						printf("\nPlease enter your new password:\t");
 						scanf("%s", pword);
@@ -182,6 +182,8 @@ int main(void) //===============================================================
 						if(fwrite != NULL)
 							printf("\nPassword successfully changed");
 						break;
+					default:
+						printf("\nInvalid option");
 
 					}
 
